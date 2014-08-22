@@ -54,7 +54,7 @@ module Playhouse
 
     def connect_to_database
       if @load_db
-        db_params = YAML.load(File.read(root_path + "/config/database.yml"))[@environment.to_s]
+        db_params = YAML.load(ERB.new(File.read(root_path + "/config/database.yml")).result())[@environment.to_s]
         ActiveRecord::Base.establish_connection db_params
       end
     end
